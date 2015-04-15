@@ -55,7 +55,7 @@ app.controller('MainCtrl', [
       posts: []
     };
     return o;
-  }])
+  }]);
 
 
   app.controller('PostsCtrl', [
@@ -63,6 +63,16 @@ app.controller('MainCtrl', [
     '$stateParams',
     'posts',
     function($scope, $stateParams, posts) {
-      $scope.post = posts.posts[$stateParams.id]
+      $scope.post = posts.posts[$stateParams.id];
+
+      $scope.addComment = function() {
+        if($scope.body==='') { return; }
+        $scope.post.comments.push({
+          body: $scope.body,
+          author: 'user',
+          upvotes: 0
+        });
+        $scope.body = '';
+      }
     }
-  ])
+  ]);
